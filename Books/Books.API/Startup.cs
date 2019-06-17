@@ -1,6 +1,9 @@
-﻿using Books.Application.Interfaces;
+﻿using Books.Application.Books.Queries;
+using Books.Application.Interfaces;
 using Books.Infrastructure.Services;
 using Books.Persistence.Contexts;
+using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -23,12 +26,14 @@ namespace Books.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetBookValidator>());
             services.AddDbContext<BookDbContext>(o => o.UseSqlServer(
                 Configuration["ConnectionStrings:BookDBConnectionString"],
                 b => b.MigrationsAssembly(typeof(BookDbContext).GetTypeInfo().Assembly
                     .GetName().Name)));
             services.AddScoped<IBooksService, BooksService>();
+            services.AddMediatR(typeof(GetAllBooksQuery));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

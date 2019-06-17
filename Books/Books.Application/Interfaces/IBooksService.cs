@@ -7,8 +7,8 @@ namespace Books.Application.Interfaces
 {
     public interface IBooksService
     {
-        //IEnumerable<Book> GetAllBooks();
-        //Book GetBook(Guid id);
+        IEnumerable<Book> GetAllBooks();  
+        Book GetBook(Guid id);
         Task<IEnumerable<Book>> GetAllBooksAsync();
         Task<Book> GetBookAsync(Guid id);   
     }
