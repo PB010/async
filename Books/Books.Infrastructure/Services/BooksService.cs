@@ -4,8 +4,8 @@ using Books.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Books.Application.Books.Models;
 
 namespace Books.Infrastructure.Services
 {
@@ -16,17 +16,6 @@ namespace Books.Infrastructure.Services
         public BooksService(BookDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-        }
-
-        public IEnumerable<Book> GetAllBooks()
-        {
-            return _context.Books.Include(b => b.Author).ToList();
-        }
-
-        public Book GetBook(Guid id)
-        {
-            return _context.Books.Include(b => b.Author)
-                .SingleOrDefault(b => b.Id == id);
         }
 
         public async Task<IEnumerable<Book>> GetAllBooksAsync()
@@ -41,6 +30,21 @@ namespace Books.Infrastructure.Services
                 .SingleOrDefaultAsync(b => b.Id == id);
 
             return bookFromDb;
+        }
+
+        public void AddBook(Book bookToAdd)
+        {
+            if (bookToAdd == null)
+                throw new ArgumentNullException(nameof(bookToAdd));
+
+            _context.Add(bookToAdd);
+            //var bookToReturn = BookDto.ConvertToBookDto(bookToAdd);
+            
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() > 0);
         }
 
         public void Dispose()

@@ -23,10 +23,11 @@ namespace Books.Application.Books.Queries
         {
             _service = service;
         }
+        
         public async Task<BookDto> Handle(GetBookQuery request, CancellationToken cancellationToken)
         {
             var bookFromDb = await _service.GetBookAsync(request.Id);
-            var bookToReturn = BookDto.Convert(bookFromDb);
+            var bookToReturn = BookDto.ConvertToBookDto(bookFromDb);
 
             return bookToReturn;
         }

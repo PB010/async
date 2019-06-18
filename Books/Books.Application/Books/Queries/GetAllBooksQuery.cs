@@ -24,7 +24,7 @@ namespace Books.Application.Books.Queries
             CancellationToken cancellationToken)
         {
             var booksFromDb = await _service.GetAllBooksAsync();
-            var booksToReturn = booksFromDb.Select(BookDto.Convert).ToList();
+            var booksToReturn = booksFromDb.Select(BookDto.ConvertToBookDto).ToList();
 
             return booksToReturn;
         }

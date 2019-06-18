@@ -1,4 +1,6 @@
-﻿using Books.Application.Books.Queries;
+﻿using AutoMapper;
+using Books.Application;
+using Books.Application.Books.Queries;
 using Books.Application.Interfaces;
 using Books.Infrastructure.Services;
 using Books.Persistence.Contexts;
@@ -34,6 +36,7 @@ namespace Books.API
                     .GetName().Name)));
             services.AddScoped<IBooksService, BooksService>();
             services.AddMediatR(typeof(GetAllBooksQuery));
+            services.AddAutoMapper(typeof(BookProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 ﻿using System;
+using Books.Application.Books.Commands;
 using Books.Application.Books.Models;
 using Books.Application.Books.Queries;
 using MediatR;
@@ -27,6 +28,12 @@ namespace Books.API.Controllers
         public async Task<BookDto> GetBook([FromRoute] GetBookQuery id)
         {
             return await _mediator.Send(id);
+        }
+
+        [HttpPost]
+        public async Task<Guid> AddBook([FromBody] AddNewBookCommand command)
+        {
+            return await _mediator.Send(command);
         }
     }
 }
