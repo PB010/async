@@ -1,12 +1,11 @@
-﻿using System;
-using Books.Application.Books.Commands;
+﻿using Books.Application.Books.Commands;
 using Books.Application.Books.Models;
 using Books.Application.Books.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Books.Persistence.Models;
 
 namespace Books.API.Controllers
 {
@@ -22,12 +21,12 @@ namespace Books.API.Controllers
         public async Task<IEnumerable<BookDto>> GetAllBooks()
         {
             return await _mediator.Send(new GetAllBooksQuery());
-        }
+            }
 
         [HttpGet("{id}")]
-        public async Task<BookDto> GetBook([FromRoute] GetBookQuery id)
+        public async Task<BookDto> GetBook([FromRoute] Guid id)
         {
-            return await _mediator.Send(id);
+            return await _mediator.Send(new GetBookQuery {Id = id});
         }
 
         [HttpPost]

@@ -1,5 +1,4 @@
-﻿using Books.Application.Books.Models;
-using Books.Application.Interfaces;
+﻿using Books.Application.Interfaces;
 using Books.Persistence.Models;
 using FluentValidation;
 using MediatR;

@@ -1,4 +1,4 @@
-﻿using Books.Application.Books.Models;
+﻿using Books.Application.External_Models;
 using Books.Persistence.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,10 @@ namespace Books.Application.Interfaces
     {
         Task<IEnumerable<Book>> GetAllBooksAsync();
         Task<Book> GetBookAsync(Guid id);
+        Task<IEnumerable<Book>> GetBookCollectionAsync(IEnumerable<Guid> id);
         void AddBook(Book bookToAdd);
         Task<bool> SaveChangesAsync();
+        Task<BookCover> GetBookCoverAsync(string coverId);
+        Task<IEnumerable<BookCover>> GetBookCoversAsync(Guid bookId);
     }
 }

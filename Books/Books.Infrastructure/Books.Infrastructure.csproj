@@ -6,11 +6,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Books.Application\Books.Application.csproj" />
     <ProjectReference Include="..\Books.Persistence\Books.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="External Models\" />
   </ItemGroup>
 
 </Project>

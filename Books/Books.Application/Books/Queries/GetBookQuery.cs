@@ -29,6 +29,8 @@ namespace Books.Application.Books.Queries
             var bookFromDb = await _service.GetBookAsync(request.Id);
             var bookToReturn = BookDto.ConvertToBookDto(bookFromDb);
 
+            var bookCover = await _service.GetBookCoverAsync("dummyCover");
+
             return bookToReturn;
         }
     }
